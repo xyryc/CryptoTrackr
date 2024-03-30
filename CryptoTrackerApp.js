@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, FlatList, Image, RefreshControl } from "react-native";
+import {
+  View,
+  Text,
+  FlatList,
+  Image,
+  RefreshControl,
+  StyleSheet,
+} from "react-native";
 import axios from "axios";
 
 const CryptoTrackerApp = () => {
@@ -25,37 +32,29 @@ const CryptoTrackerApp = () => {
 
   const onRefresh = () => {
     setIsRefreshing(true);
-    setTimeout(fetchCryptoData, 7000);
-    // fetchCryptoData();
+    setTimeout(fetchCryptoData, 5000);
   };
 
   const renderCryptoItem = ({ item }) => (
-    <View
-      style={{
-        flexDirection: "row",
-        justifyContent: "space-around",
-        paddingVertical: 10,
-        borderBottomWidth: 1,
-        borderBottomColor: "#ccc",
-      }}
-    >
-      <Image
-        source={{ uri: item.image }}
-        style={{ width: 30, height: 30, marginRight: 10 }}
-      />
-      <Text>{item.name}</Text>
-      <Text>{item.symbol}</Text>
-      <Text>${item.current_price.toFixed(2)}</Text>
+    <View style={styles.cryptoItemContainer}>
+      <Image source={{ uri: item.image }} style={styles.cryptoItemImage} />
+      <View style={styles.cryptoItemDetails}>
+        <Text style={styles.cryptoItemName}>{item.name}</Text>
+        <Text style={styles.cryptoItemSymbol}>{item.symbol}</Text>
+      </View>
+      <Text style={styles.cryptoItemPrice}>
+        ${item.current_price.toFixed(2)}
+      </Text>
     </View>
   );
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={styles.container}>
       <FlatList
         data={cryptoData}
         renderItem={renderCryptoItem}
         keyExtractor={(item) => item.id}
-        style={{ width: "100%" }}
+        style={styles.flatList}
         refreshControl={
           <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
         }
@@ -63,5 +62,44 @@ const CryptoTrackerApp = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#f0f0f0",
+    paddingHorizontal: 20,
+    paddingTop: 20,
+  },
+  flatList: {
+    flex: 1,
+  },
+  cryptoItemContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: "#ccc",
+  },
+  cryptoItemImage: {
+    width: 40,
+    height: 40,
+    marginRight: 15,
+  },
+  cryptoItemDetails: {
+    flex: 1,
+  },
+  cryptoItemName: {
+    fontSize: 16,
+    fontWeight: "bold",
+    marginBottom: 5,
+  },
+  cryptoItemSymbol: {
+    color: "#666",
+  },
+  cryptoItemPrice: {
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+});
 
 export default CryptoTrackerApp;
