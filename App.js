@@ -12,7 +12,7 @@ const App = () => {
       <View style={{ flex: 1 }}>
         <StatusBar hidden={false} barStyle="auto" />
         <Drawer.Navigator initialRouteName="Home">
-          <Drawer.Screen name="Home" component={CryptoTrackerApp} />
+          <Drawer.Screen name="CryptoTrackr" component={CryptoTrackerApp} />
           {/* Add more screens here if needed */}
         </Drawer.Navigator>
       </View>
