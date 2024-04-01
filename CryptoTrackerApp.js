@@ -115,6 +115,7 @@ import {
   StyleSheet,
   Modal,
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
 import axios from "axios";
 import { ScrollView } from "react-native-gesture-handler";
@@ -123,6 +124,7 @@ const CryptoTrackerApp = () => {
   const [cryptoData, setCryptoData] = useState([]);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [selectedCoin, setSelectedCoin] = useState(null);
+  const screenHeight = Dimensions.get("window").height;
 
   useEffect(() => {
     fetchCryptoData();
@@ -181,7 +183,9 @@ const CryptoTrackerApp = () => {
           onRequestClose={() => setSelectedCoin(null)}
         >
           <View style={styles.modalBackground}>
-            <View style={styles.modalContainer}>
+            <View
+              style={[styles.modalContainer, { maxHeight: screenHeight - 100 }]}
+            >
               <TouchableOpacity
                 style={styles.closeButton}
                 onPress={() => setSelectedCoin(null)}
@@ -194,69 +198,84 @@ const CryptoTrackerApp = () => {
                   style={styles.modalImage}
                 />
                 <Text style={styles.modalHeader}>
-                  Name: {selectedCoin.name}
+                  {selectedCoin.name} ({selectedCoin.symbol})
                 </Text>
-                <Text style={styles.modalText}>
-                  Symbol: {selectedCoin.symbol}
-                </Text>
-                <Text style={styles.modalText}>
-                  Current Price: ${selectedCoin.current_price}
-                </Text>
-                <Text style={styles.modalText}>
-                  Market Cap: ${selectedCoin.market_cap}
-                </Text>
-                <Text style={styles.modalText}>
-                  Market Cap Rank: ${selectedCoin.market_cap_rank}
-                </Text>
-                <Text style={styles.modalText}>
-                  Total Volume: ${selectedCoin.total_volume}
-                </Text>
-                <Text style={styles.modalText}>
-                  high_24h: ${selectedCoin.high_24h}
-                </Text>
-                <Text style={styles.modalText}>
-                  low_24h: ${selectedCoin.low_24h}
-                </Text>
-                <Text style={styles.modalText}>
-                  price_change_24h: ${selectedCoin.price_change_24h}
-                </Text>
-                <Text style={styles.modalText}>
-                  price_change_percentage_24h: $
-                  {selectedCoin.price_change_percentage_24h}
-                </Text>
-                <Text style={styles.modalText}>
-                  market_cap_change_24h: ${selectedCoin.market_cap_change_24h}
-                </Text>
-                <Text style={styles.modalText}>
-                  market_cap_change_percentage_24h: $
-                  {selectedCoin.market_cap_change_percentage_24h}
-                </Text>
-                <Text style={styles.modalText}>
-                  circulating_supply: ${selectedCoin.circulating_supply}
-                </Text>
-                <Text style={styles.modalText}>
-                  total_supply: ${selectedCoin.total_supply}
-                </Text>
-                <Text style={styles.modalText}>
-                  max_supply: ${selectedCoin.max_supply}
-                </Text>
-                <Text style={styles.modalText}>ath: ${selectedCoin.ath}</Text>
-                <Text style={styles.modalText}>
-                  ath_change_percentage: ${selectedCoin.ath_change_percentage}
-                </Text>
-                <Text style={styles.modalText}>
-                  ath_date: ${selectedCoin.ath_date}
-                </Text>
-                <Text style={styles.modalText}>atl: ${selectedCoin.atl}</Text>
-                <Text style={styles.modalText}>
-                  atl_change_percentage: ${selectedCoin.atl_change_percentage}
-                </Text>
-                <Text style={styles.modalText}>
-                  atl_date: ${selectedCoin.atl_date}
-                </Text>
-                <Text style={styles.modalText}>
-                  Last Updated: {selectedCoin.last_updated}
-                </Text>
+                <View style={styles.dataContainer}>
+                  <Text style={styles.dataLabel}>Current Price:</Text>
+                  <Text style={styles.dataValue}>
+                    ${selectedCoin.current_price}
+                  </Text>
+                  <Text style={styles.dataLabel}>Market Cap:</Text>
+                  <Text style={styles.dataValue}>
+                    ${selectedCoin.market_cap}
+                  </Text>
+                  <Text style={styles.dataLabel}>Market Cap Rank:</Text>
+                  <Text style={styles.dataValue}>
+                    {selectedCoin.market_cap_rank}
+                  </Text>
+                  <Text style={styles.dataLabel}>Total Volume:</Text>
+                  <Text style={styles.dataValue}>
+                    ${selectedCoin.total_volume}
+                  </Text>
+                  <Text style={styles.dataLabel}>24h High:</Text>
+                  <Text style={styles.dataValue}>${selectedCoin.high_24h}</Text>
+                  <Text style={styles.dataLabel}>24h Low:</Text>
+                  <Text style={styles.dataValue}>${selectedCoin.low_24h}</Text>
+                  <Text style={styles.dataLabel}>Price Change (24h):</Text>
+                  <Text style={styles.dataValue}>
+                    ${selectedCoin.price_change_24h}
+                  </Text>
+                  <Text style={styles.dataLabel}>
+                    Price Change Percentage (24h):
+                  </Text>
+                  <Text style={styles.dataValue}>
+                    {selectedCoin.price_change_percentage_24h}%
+                  </Text>
+                  <Text style={styles.dataLabel}>Market Cap Change (24h):</Text>
+                  <Text style={styles.dataValue}>
+                    ${selectedCoin.market_cap_change_24h}
+                  </Text>
+                  <Text style={styles.dataLabel}>
+                    Market Cap Change Percentage (24h):
+                  </Text>
+                  <Text style={styles.dataValue}>
+                    {selectedCoin.market_cap_change_percentage_24h}%
+                  </Text>
+                  <Text style={styles.dataLabel}>Circulating Supply:</Text>
+                  <Text style={styles.dataValue}>
+                    {selectedCoin.circulating_supply}
+                  </Text>
+                  <Text style={styles.dataLabel}>Total Supply:</Text>
+                  <Text style={styles.dataValue}>
+                    {selectedCoin.total_supply}
+                  </Text>
+                  <Text style={styles.dataLabel}>Max Supply:</Text>
+                  <Text style={styles.dataValue}>
+                    {selectedCoin.max_supply
+                      ? `$${selectedCoin.max_supply}`
+                      : "N/A"}
+                  </Text>
+                  <Text style={styles.dataLabel}>All-Time High (ATH):</Text>
+                  <Text style={styles.dataValue}>${selectedCoin.ath}</Text>
+                  <Text style={styles.dataLabel}>ATH Change Percentage:</Text>
+                  <Text style={styles.dataValue}>
+                    {selectedCoin.ath_change_percentage}%
+                  </Text>
+                  <Text style={styles.dataLabel}>ATH Date:</Text>
+                  <Text style={styles.dataValue}>{selectedCoin.ath_date}</Text>
+                  <Text style={styles.dataLabel}>All-Time Low (ATL):</Text>
+                  <Text style={styles.dataValue}>${selectedCoin.atl}</Text>
+                  <Text style={styles.dataLabel}>ATL Change Percentage:</Text>
+                  <Text style={styles.dataValue}>
+                    {selectedCoin.atl_change_percentage}%
+                  </Text>
+                  <Text style={styles.dataLabel}>ATL Date:</Text>
+                  <Text style={styles.dataValue}>{selectedCoin.atl_date}</Text>
+                  <Text style={styles.dataLabel}>Last Updated:</Text>
+                  <Text style={styles.dataValue}>
+                    {new Date(selectedCoin.last_updated).toLocaleString()}
+                  </Text>
+                </View>
               </ScrollView>
             </View>
           </View>
@@ -313,32 +332,46 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderRadius: 10,
     padding: 20,
-    width: "80%",
+    width: "90%",
     maxWidth: 400,
-    alignItems: "center",
   },
   closeButton: {
     position: "absolute",
-    top: 20,
-    right: 20,
+    top: 10,
+    right: 10,
   },
   closeButtonText: {
-    fontSize: 18,
+    fontSize: 16,
     color: "blue",
   },
   modalImage: {
-    width: 100,
-    height: 100,
-    marginBottom: 20,
+    width: "100%",
+    height: 200,
+    marginBottom: 10,
+    borderRadius: 10,
   },
   modalHeader: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: "bold",
     marginBottom: 10,
   },
-  modalText: {
+  dataContainer: {
+    marginBottom: 20,
+  },
+  dataLabel: {
     fontSize: 16,
-    marginBottom: 10,
+    color: "#333",
+    marginBottom: 5,
+  },
+  dataValue: {
+    fontSize: 16,
+    color: "#555",
+    marginBottom: 12,
+    fontStyle: "italic",
+    backgroundColor: "#fff",
+    borderWidth: 0.2,
+    borderRadius: 6,
+    padding: 5,
   },
 });
 
