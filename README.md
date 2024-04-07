@@ -1,7 +1,7 @@
-# CryptoApp
+# CryptoTrackr
 <img src="./screenshots/mockup.jpg" width="500" alt="Screenshot 1">
 
-CryptoApp is a mobile application developed with React Native that allows users to track cryptocurrency prices and view detailed information about different cryptocurrencies.
+CryptoTrackr is a mobile application developed with React Native that allows users to track cryptocurrency prices and view detailed information about different cryptocurrencies.
 
 ## Features
 
@@ -24,8 +24,8 @@ CryptoApp is a mobile application developed with React Native that allows users 
 
 To run this app locally, follow these steps:
 
-1. Clone this repository: `git clone https://github.com/your-username/CryptoApp.git`
-2. Navigate to the project directory: `cd CryptoApp`
+1. Clone this repository: `git clone https://github.com/your-username/CryptoTrackr.git`
+2. Navigate to the project directory: `cd CryptoTrackr`
 3. Install dependencies: `npm install`
 4. Run the app on iOS: `npx react-native run-ios`
 5. Run the app on Android: `npx react-native run-android`
