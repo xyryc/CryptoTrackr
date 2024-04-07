@@ -24,7 +24,7 @@ CryptoTrackr is a mobile application developed with React Native that allows use
 
 To run this app locally, follow these steps:
 
-1. Clone this repository: `git clone https://github.com/your-username/CryptoTrackr.git`
+1. Clone this repository: `git clone https://github.com/duskdev17/CryptoTrackr.git`
 2. Navigate to the project directory: `cd CryptoTrackr`
 3. Install dependencies: `npm install`
 4. Run the app on iOS: `npx react-native run-ios`
