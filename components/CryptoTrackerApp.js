@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import axios from "axios";
 import { ScrollView } from "react-native-gesture-handler";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const CryptoTrackerApp = () => {
   const [cryptoData, setCryptoData] = useState([]);

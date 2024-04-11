@@ -1,7 +1,18 @@
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Linking,
+} from "react-native";
 
 const AboutScreen = () => {
+  const openGithub = () => {
+    Linking.openURL("https://github.com/duskdev17");
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -10,15 +21,25 @@ const AboutScreen = () => {
       </View>
       <View style={styles.content}>
         <Text style={styles.text}>
-          CryptoTrackr is a mobile application developed by xyryc that allows
-          users to track cryptocurrency prices and view detailed information
-          about different cryptocurrencies.
+          Welcome to CryptoTrackr! This mobile application is developed by{" "}
+          <TouchableOpacity onPress={openGithub}>
+            <Text style={styles.link}>xyryc</Text>
+          </TouchableOpacity>{" "}
+          to help you track cryptocurrency prices and explore detailed
+          information about various cryptocurrencies.
         </Text>
-        <Text style={styles.text}>Version: 1.0</Text>
-        <Text style={styles.text}>© 2024 xyryc. All rights reserved.</Text>
+        <Text style={styles.text}>Version: 1.0.1</Text>
         <Text style={styles.text}>
-          All trademarks, service marks, trade names, product names, and logos
-          appearing on this app are the property of their respective owners.
+          © 2024{" "}
+          <TouchableOpacity onPress={openGithub}>
+            <Text style={styles.link}>xyryc</Text>
+          </TouchableOpacity>
+          . All rights reserved.
+        </Text>
+        <Text style={styles.text}>
+          Please note that all trademarks, service marks, trade names, product
+          names, and logos appearing on this app are the property of their
+          respective owners.
         </Text>
       </View>
     </View>
@@ -55,7 +76,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 24,
     marginBottom: 15,
-    color: "#555",
+    color: "#333",
+  },
+  link: {
+    color: "#007bff",
+    fontSize: 16,
+    textDecorationLine: "underline",
   },
 });
 
